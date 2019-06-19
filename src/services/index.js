@@ -5,4 +5,10 @@ export const api = {
   fetchUser() {
     return axios.get(`${config.BASE_URL}${config.PEOPLE_LABLE}`);
   },
+
+  searchSW(planet) {
+    return axios.get(
+      `${config.BASE_URL}${config.PLANET_LABLE}?search=${planet}`,
+    );
+  },
 };

@@ -1,4 +1,4 @@
-import ACTIONS from '../action';
+import { SET_LOGIN } from '../action';
 
 const initialState = {
   loggedIn: false,
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ACTIONS.SET_LOGIN: {
+    case SET_LOGIN: {
       return {
         ...state,
         loggedIn: action.isLogedIn,

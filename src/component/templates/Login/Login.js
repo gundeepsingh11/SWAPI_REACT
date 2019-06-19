@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { setLogin, SET_CHARACTERS, SET_LOGIN } from '../../../modules/action';
+import { SET_CHARACTERS, SET_LOGIN } from '../../../modules/action';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import requireAuth from '../../../utility/requiresAuth';
 
 class Login extends Component {
   constructor(props) {
@@ -33,7 +35,8 @@ class Login extends Component {
     if (characters.results) {
       if (this.checkUser(characters.results)) {
         setLogin(true);
-        history.push('/search');
+        return <Redirect to="/search" />;
+        // history.push('/search');
       } else {
         this.setState({
           error: true,
@@ -94,7 +97,9 @@ const mapStateToProps = state => ({
   ...state,
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login);
+export default requireAuth(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Login),
+);
