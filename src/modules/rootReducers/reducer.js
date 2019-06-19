@@ -1,4 +1,4 @@
-import { RECEIVE_CHARACTERS, SEARCH_PLANET } from '../action';
+import { RECEIVE_CHARACTERS } from '../action';
 
 const initialState = {};
 

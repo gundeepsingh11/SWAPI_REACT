@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import GlobalStyle from '../src/styles';
 import * as serviceWorker from './serviceWorker';
 import { Provider as ReduxProvider } from 'react-redux';
 import configureStore from './modules/store';
@@ -10,6 +11,7 @@ const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
 ReactDOM.render(
   <ReduxProvider store={reduxStore}>
+    <GlobalStyle />
     <Layout />
   </ReduxProvider>,
   document.getElementById('root'),

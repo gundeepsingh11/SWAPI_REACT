@@ -4,6 +4,9 @@ import { SET_CHARACTERS, SET_LOGIN } from '../../../modules/action';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import requireAuth from '../../../utility/requiresAuth';
+import withStyles from '../../../utility/withStyles';
+import styles from './Login.style';
+import Form from '../../organisms/Form';
 
 class Login extends Component {
   constructor(props) {
@@ -17,7 +20,7 @@ class Login extends Component {
     };
   }
 
-  updateUser(attr, event) {
+  updateUser = (attr, event) => {
     const { user } = this.state;
     const updateUser = { ...user };
     updateUser[attr] = event.target.value;
@@ -25,25 +28,32 @@ class Login extends Component {
     this.setState({
       user: updateUser,
     });
-  }
+  };
 
-  logInUser(e) {
+  logInUser = e => {
     e.preventDefault();
-    const { setLogin, history } = this.props;
-    const { characters } = this.props;
+    const { setLogin, characters } = this.props;
+    const checkCookie = localStorage.getItem('userLogIn');
 
-    if (characters.results) {
-      if (this.checkUser(characters.results)) {
-        setLogin(true);
-        return <Redirect to="/search" />;
-        // history.push('/search');
+    if (checkCookie) {
+      return <Redirect to="/search" />;
+    } else {
+      if (characters.results) {
+        if (this.checkUser(characters.results)) {
+          setLogin(true);
+          return <Redirect to="/search" />;
+        } else {
+          this.setState({
+            error: true,
+          });
+        }
       } else {
         this.setState({
           error: true,
         });
       }
     }
-  }
+  };
 
   checkUser = data => {
     const { user } = this.state;
@@ -58,32 +68,40 @@ class Login extends Component {
 
   render() {
     const { error } = this.state;
+    const { className } = this.props;
 
     return (
-      <form>
-        {error && <p>Invalid User</p>}
-        <div>
-          <label>User Name</label>
-          <input
-            onBlur={e => {
-              this.updateUser('username', e);
-            }}
-            type="text"
-          />
-        </div>
-        <div>
-          <label>PassWord</label>
-          <input
-            type="password"
-            onBlur={e => {
-              this.updateUser('password', e);
-            }}
-          />
-        </div>
-        <button type="submit" name="submit" onClick={e => this.logInUser(e)}>
-          Login In
-        </button>
-      </form>
+      <section className={className}>
+        <Form
+          error={error}
+          logInUser={this.logInUser}
+          updateUser={this.updateUser}
+        />
+      </section>
+      // <form className={`container ${className}`}>
+      //   {error && <p>Invalid User</p>}
+      //   <div>
+      //     <label>User Name</label>
+      //     <Input
+      //       onBlur={e => {
+      //         this.updateUser('username', e);
+      //       }}
+      //       type="text"
+      //     />
+      //   </div>
+      //   <div>
+      //     <label>PassWord</label>
+      //     <Input
+      //       type="password"
+      //       onBlur={e => {
+      //         this.updateUser('password', e);
+      //       }}
+      //     />
+      //   </div>
+      //   <button type="submit" name="submit" onClick={e => this.logInUser(e)}>
+      //     Login In
+      //   </button>
+      // </form>
     );
   }
 }
@@ -101,5 +119,5 @@ export default requireAuth(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(Login),
+  )(withStyles(Login, styles)),
 );

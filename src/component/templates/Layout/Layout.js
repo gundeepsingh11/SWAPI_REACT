@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -9,13 +10,11 @@ import Home from '../Home';
 
 class Layout extends Component {
   render() {
-    const { login } = this.props;
-
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/search" component={SearchPlanet} />
           <Route path="/login" component={Login} />
+          <Route path="/search" component={SearchPlanet} />
           <Route path="/" component={Home} />
         </Switch>
       </BrowserRouter>
