@@ -13,9 +13,9 @@ class Layout extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/login" component={Login} />
+          {/* <Route path="/login" component={Login} /> */}
           <Route path="/search" component={SearchPlanet} />
-          <Route path="/" component={Home} />
+          <Route path="/" component={Login} />
         </Switch>
       </BrowserRouter>
     );

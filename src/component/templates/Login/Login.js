@@ -7,6 +7,7 @@ import requireAuth from '../../../utility/requiresAuth';
 import withStyles from '../../../utility/withStyles';
 import styles from './Login.style';
 import Form from '../../organisms/Form';
+import Search from '../SearchPlanet';
 
 class Login extends Component {
   constructor(props) {
@@ -19,6 +20,17 @@ class Login extends Component {
       error: false,
     };
   }
+
+  componentDidMount() {
+    this.checkCookie();
+  }
+
+  checkCookie = () => {
+    const checkCookie = localStorage.getItem('userLogIn');
+    if (checkCookie) {
+      this.props.history.push('/search');
+    }
+  };
 
   updateUser = (attr, event) => {
     const { user } = this.state;
@@ -36,12 +48,12 @@ class Login extends Component {
     const checkCookie = localStorage.getItem('userLogIn');
 
     if (checkCookie) {
-      return <Redirect to="/search" />;
+      return this.props.history.push('/search');
     } else {
       if (characters.results) {
         if (this.checkUser(characters.results)) {
           setLogin(true);
-          return <Redirect to="/search" />;
+          return this.props.history.push('/search');
         } else {
           this.setState({
             error: true,
@@ -115,9 +127,7 @@ const mapStateToProps = state => ({
   ...state,
 });
 
-export default requireAuth(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(withStyles(Login, styles)),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(Login, styles));

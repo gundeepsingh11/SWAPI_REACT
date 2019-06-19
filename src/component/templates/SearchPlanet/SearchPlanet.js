@@ -74,7 +74,6 @@ const mapDispatchToProps = () => ({});
 const mapStateToProps = state => ({
   ...state,
 });
-// console.log(requireAuth(SearchPlanet));
 
 export default requireAuth(
   connect(
