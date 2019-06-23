@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Home from '../component/templates/Home';
 import Login from '../component/templates/Login';
 import { Redirect } from 'react-router-dom';
 // import SearchPlanet from '../component/templates/SearchPlanet';
@@ -11,7 +10,6 @@ const HOC = WrappedComponent =>
 
       if (window.location.pathname === '/login' && !checkCookie) {
         return <Redirect to="/" />;
-        // return <Home />;
       } else {
         if (checkCookie) {
           return true;

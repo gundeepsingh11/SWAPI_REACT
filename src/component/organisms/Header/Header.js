@@ -2,14 +2,12 @@ import React from 'react';
 import withStyles from '../../../utility/withStyles';
 import styles from './Header.style';
 import Picture from '../../atoms/Picture';
-import Logout from '../../templates/Layout';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const Header = ({ className, history, logOut }) => {
   const logoutUser = () => {
     localStorage.removeItem('userLogIn');
     return history.push('/');
-    // return <Redirect to="/" />;
   };
 
   return (
@@ -17,14 +15,12 @@ const Header = ({ className, history, logOut }) => {
       <div className="container">
         <div className="row middle-xs center-xs">
           <div className="col-xs search search-icon">
-            {/* <Redirect to="/search"> */}
             <Picture
               className="search"
               largeImage="/static/img/search-icon.jpg"
               smallIamge="/static/img/search-icon.jpg"
               alt="search-planet"
             />
-            {/* </Redirect> */}
           </div>
           <Picture
             className="col-xs header-logo"

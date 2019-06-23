@@ -7,7 +7,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // importing Pages
 import Login from '../Login';
 import SearchPlanet from '../SearchPlanet';
-import Home from '../Home';
 
 class Layout extends Component {
   render() {

@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { SET_CHARACTERS, SET_LOGIN } from '../../../modules/action';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
-import requireAuth from '../../../utility/requiresAuth';
+import { withRouter } from 'react-router-dom';
 import withStyles from '../../../utility/withStyles';
 import styles from './Login.style';
 import Form from '../../organisms/Form';
-import Search from '../SearchPlanet';
 import Header from '../../organisms/Header';
 
 class Login extends Component {
@@ -49,13 +47,11 @@ class Login extends Component {
     const checkCookie = localStorage.getItem('userLogIn');
 
     if (checkCookie) {
-      // return <Redirect to="/search" />;
       return this.props.history.push('/search');
     } else {
       if (characters.results) {
         if (this.checkUser(characters.results)) {
           setLogin(true);
-          // return <Redirect to="/search" />;
           return this.props.history.push('/search');
         } else {
           this.setState({
@@ -73,7 +69,10 @@ class Login extends Component {
   checkUser = data => {
     const { user } = this.state;
     for (let element of data) {
-      if ('Luke Skywalker' === element.name && '19BBY' === element.birth_year) {
+      if (
+        user.username === element.name &&
+        user.password === element.birth_year
+      ) {
         localStorage.setItem('userLogIn', element.name);
         return true;
       }
