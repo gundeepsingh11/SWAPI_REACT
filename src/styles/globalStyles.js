@@ -20,6 +20,7 @@ export default `
 }
 
 body {
+  height: 100vh;
   font-family: ${Theme.fontFamilyPrimaryLight}, Helvetica, Arial, sans-serif;
   font-size: ${Theme.fontLarge};
   font-weight: ${Theme.fontNormal};
@@ -39,6 +40,10 @@ body {
   //   min-height: 640px;
   //   transform: skewX(-15deg);
   // }
+}
+
+#root {
+  height: 100%;
 }
 
 
@@ -227,6 +232,21 @@ h1 {
   40% {
     box-shadow: 0 2.5em 0.5px 0;
   }
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 1000ms ease-in-out;
+        background-color: rgba(0, 0, 0, 0.83) !important
+
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
 }
 
 

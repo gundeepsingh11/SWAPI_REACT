@@ -34,7 +34,7 @@ const theme = {
   buttonColorSecondary: colors.WHITE,
   buttonHoverColor: colors.BUTTON_HOVER,
 
-  tickColor: colors.YELLOW,
+  yellow: colors.YELLOW,
 
   colorOutline: colors.OUTLINE,
 

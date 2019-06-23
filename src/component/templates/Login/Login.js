@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import { SET_CHARACTERS, SET_LOGIN } from '../../../modules/action';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import requireAuth from '../../../utility/requiresAuth';
 import withStyles from '../../../utility/withStyles';
 import styles from './Login.style';
 import Form from '../../organisms/Form';
 import Search from '../SearchPlanet';
+import Header from '../../organisms/Header';
 
 class Login extends Component {
   constructor(props) {
@@ -48,11 +49,13 @@ class Login extends Component {
     const checkCookie = localStorage.getItem('userLogIn');
 
     if (checkCookie) {
+      // return <Redirect to="/search" />;
       return this.props.history.push('/search');
     } else {
       if (characters.results) {
         if (this.checkUser(characters.results)) {
           setLogin(true);
+          // return <Redirect to="/search" />;
           return this.props.history.push('/search');
         } else {
           this.setState({
@@ -83,37 +86,14 @@ class Login extends Component {
     const { className } = this.props;
 
     return (
-      <section className={className}>
+      <section className={` ${className}`}>
+        <Header />
         <Form
           error={error}
           logInUser={this.logInUser}
           updateUser={this.updateUser}
         />
       </section>
-      // <form className={`container ${className}`}>
-      //   {error && <p>Invalid User</p>}
-      //   <div>
-      //     <label>User Name</label>
-      //     <Input
-      //       onBlur={e => {
-      //         this.updateUser('username', e);
-      //       }}
-      //       type="text"
-      //     />
-      //   </div>
-      //   <div>
-      //     <label>PassWord</label>
-      //     <Input
-      //       type="password"
-      //       onBlur={e => {
-      //         this.updateUser('password', e);
-      //       }}
-      //     />
-      //   </div>
-      //   <button type="submit" name="submit" onClick={e => this.logInUser(e)}>
-      //     Login In
-      //   </button>
-      // </form>
     );
   }
 }
@@ -127,7 +107,9 @@ const mapStateToProps = state => ({
   ...state,
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withStyles(Login, styles));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(withStyles(Login, styles)),
+);
