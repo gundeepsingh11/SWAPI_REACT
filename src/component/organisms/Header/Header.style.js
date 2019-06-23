@@ -12,7 +12,7 @@ export default css`
     display: flex;
     align-items: center;
     img {
-      height: 60px;
+      height: 30px;
     }
   }
 `;

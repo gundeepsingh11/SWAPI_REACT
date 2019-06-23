@@ -17,8 +17,8 @@ const Header = ({ className, history, logOut }) => {
           <div className="col-xs search search-icon">
             <Picture
               className="search"
-              largeImage="/static/img/search-icon.jpg"
-              smallIamge="/static/img/search-icon.jpg"
+              largeImage="/static/img/search-icon.png"
+              smallIamge="/static/img/search-icon.png"
               alt="search-planet"
             />
           </div>
