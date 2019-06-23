@@ -42,14 +42,18 @@ class SearchPlanet extends Component {
   }
 
   openModal = planetData => {
-    document.getElementById(planetData.idx).classList.add('zoom-card');
+    if (document.getElementById(planetData.idx)) {
+      document.getElementById(planetData.idx).classList.add('zoom-card');
+    }
     this.setState({ modalIsOpen: true, selectedPlanet: planetData });
   };
 
   closeModal = () => {
-    document
-      .getElementById(this.state.selectedPlanet.idx)
-      .classList.remove('zoom-card');
+    if (document.getElementById(this.state.selectedPlanet.idx)) {
+      document
+        .getElementById(this.state.selectedPlanet.idx)
+        .classList.remove('zoom-card');
+    }
     this.setState({ modalIsOpen: false });
   };
 

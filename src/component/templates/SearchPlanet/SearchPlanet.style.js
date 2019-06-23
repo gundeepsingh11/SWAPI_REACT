@@ -8,11 +8,26 @@ export default css`
     display: flex;
     list-style: none;
     padding: 0;
+    transition: all 2s;
 
     li {
       position: relative;
       margin: 5px;
-      transition: all 0.8s;
+      /* transition: all 0.8s; */
+      /* transition: left 8s; */
+    }
+
+    .zoom-card {
+      transition: all 2s;
+      transition: left 0.8s;
+      transform: scale(1.5);
+      position: absolute;
+      left: 0;
+      z-index: 9;
+
+      .card-wrapper {
+        box-shadow: none;
+      }
     }
   }
 
@@ -27,15 +42,6 @@ export default css`
     margin-top: -50px;
   }
 
-  .zoom-card {
-    transition: all 2s;
-    transform: scale(1.5);
-    z-index: 9;
-
-    .card-wrapper {
-      box-shadow: none;
-    }
-  }
   .card-modal {
     p {
       margin-right: 10px;
