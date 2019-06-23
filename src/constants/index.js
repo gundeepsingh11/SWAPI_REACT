@@ -1,5 +1,5 @@
 export default {
-  BASE_URL: 'http://swapi.co/api/',
+  BASE_URL: 'https://swapi.co/api/',
   PEOPLE_LABLE: 'people/',
   PLANET_LABLE: 'planets/',
 };
